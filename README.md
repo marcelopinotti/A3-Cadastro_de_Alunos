@@ -1,2 +1,2 @@
 # A3-Cadastro_de_Alunos
-Trabalho da A3 sobre o tema "Cadastro de Alunos", sendo usado UML(PlantUML) / Java / SQL
+Projeto da A3 voltado para o tema 'Cadastro de Alunos', utilizando modelagem UML (PlantUML), implementação em Java e integração com banco de dados SQL. O design da interface foi desenvolvido com auxílio do Figma.
