@@ -1,0 +1,118 @@
+@startuml
+title Diagrama de Sequência Refinado - Cadastro de Novo Aluno
+
+
+skinparam titleFontSize 20
+skinparam defaultFontName "Segoe UI", "Arial", "Helvetica", SansSerif ' 
+skinparam ParticipantPadding 15 ' 
+skinparam RoundCorner 10 ' 
+skinparam Shadowing false '
+
+skinparam sequenceParticipantBorderColor DimGray
+skinparam sequenceArrowColor DimGray ' Cor padrão para setas
+skinparam sequenceLifeLineBorderColor Silver
+skinparam sequenceLifeLineBackgroundColor #F8F8F8
+skinparam noteBackgroundColor #LightYellow
+skinparam noteBorderColor DimGray
+skinparam sequenceGroupBodyBackgroundColor #F0F0F0
+skinparam sequenceReferenceBackgroundColor #AliceBlue
+
+' Definição dos participantes com cores de fundo aplicadas diretamente
+actor Funcionario
+participant "Tela de Cadastro" as Tela #LightSkyBlue
+participant "Controlador de Funcionário" as Controlador #PaleGreen
+participant "Serviço de Cadastro de Aluno" as Servico #LightSalmon
+participant "Validador de Dados do Aluno" as Validador #Plum
+participant "Repositório de Alunos" as Repositorio #LightCyan
+database "Banco de Dados" as Banco #LightGrey
+
+== Início do processo de Cadastro ==
+Funcionario -> Tela : abrirTelaCadastroAluno()
+activate Tela
+' Espaçador vertical
+|||
+
+note right of Tela
+Usuário interage com a tela
+para preencher os dados
+do novo aluno.
+end note
+' Espaçador vertical
+|||
+
+Tela -> Controlador : solicitarCadastroAluno(dadosAluno : DadosAlunoDTO)
+deactivate Tela
+activate Controlador
+' Espaçador vertical
+|||
+
+Controlador -> Servico : processarSolicitacaoCadastro(dadosAluno)
+activate Servico
+' Espaçador vertical
+|||
+
+Servico -> Validador : validarDadosAluno(dadosAluno)
+activate Validador
+Validador --> Servico : resultadoValidacao {status: StatusValidacao, erros: ListaErros}
+deactivate Validador
+
+note left of Servico
+Validador retorna um objeto
+com o status (OK/FALHA)
+e a lista de erros (se houver).
+end note
+' Espaçador vertical
+|||
+
+alt resultadoValidacao.status == OK
+    note right of Servico #PaleGreen
+    Dados do aluno são válidos.
+    Prosseguir com o salvamento.
+    end note
+    ' Espaçador vertical
+    |||
+
+    Servico -[#ForestGreen]-> Repositorio : salvarNovoAluno(dadosAluno)
+    activate Repositorio
+    Repositorio -[#ForestGreen]-> Banco : insertAluno(dadosAluno)
+    activate Banco
+    Banco --[#ForestGreen]-> Repositorio : confirmacaoGravacao {sucesso: boolean, idGerado?: int}
+    deactivate Banco
+    Repositorio --[#ForestGreen]-> Servico : alunoPersistido(aluno : Aluno)
+    deactivate Repositorio
+    ' Espaçador vertical
+    |||
+    
+    Servico --[#ForestGreen]-> Controlador : cadastroRealizadoComSucesso(alunoPersistido)
+    deactivate Servico
+    ' Espaçador vertical
+    |||
+    
+    Controlador --[#ForestGreen]-> Tela : operacaoConcluidaComSucesso(alunoPersistido)
+    activate Tela
+    Tela -[#ForestGreen]-> Funcionario : exibirFeedbackSucesso("Aluno cadastrado com sucesso! ID: " + alunoPersistido.getId())
+    deactivate Tela
+    
+else resultadoValidacao.status == FALHA
+    note right of Servico #LightPink
+    Dados do aluno são inválidos.
+    end note
+    ' Espaçador vertical
+    |||
+
+    Servico --[#Crimson]-> Controlador : falhaNaValidacaoDosDados(resultadoValidacao.erros)
+    deactivate Servico
+    ' Espaçador vertical
+    |||
+    
+    Controlador --[#Crimson]-> Tela : falhaNaOperacaoDeCadastro(resultadoValidacao.erros)
+    activate Tela
+    Tela -[#Crimson]-> Funcionario : exibirFeedbackErro("Erro ao cadastrar aluno: " + formatarErros(resultadoValidacao.erros))
+    deactivate Tela
+end
+' Espaçador vertical
+|||
+
+deactivate Controlador
+
+@enduml

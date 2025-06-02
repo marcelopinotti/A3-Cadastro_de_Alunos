@@ -1,0 +1,116 @@
+@startuml
+title Diagrama de Classes - Cadastro de Alunos
+
+left to right direction
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+
+class Aluno {
+  - alunoID: int
+  - nome: String
+  - cpf: String
+  - email: String
+  - telefone: String
+  - endereco: String
+  --
+  + autenticarSe(login, senha): boolean
+  + realizarLogout()
+  + atualizarPropriosDados(novosDados: Map)
+  + consultarProprioHistorico(): List<HistoricoAcademico>
+  + consultarPropriasNotas(): List<Nota>
+  + anexarDocumento(documento: DocumentoAluno)
+}
+
+class Funcionario {
+  - funcionarioID: int
+  - nome: String
+  - cargo: String
+  - login: String
+  - senha: String
+  --
+  + autenticarSe(login, senha): boolean
+  + realizarLogout()
+  + cadastrarAluno(dadosAluno: Map): Aluno
+  + consultarListarAlunos(): List<Aluno>
+  + atualizarDadosAluno(alunoID: int, novosDados: Map)
+  + excluirAluno(alunoID: int)
+  + matricularAlunoEmCurso(alunoID: int, cursoID: int): HistoricoAcademico
+  + atualizarStatusMatricula(historicoID: int, novoStatus: String)
+  + cadastrarNovoCurso(dadosCurso: Map): Curso
+  + consultarListarCursos(): List<Curso>
+  + atualizarDadosCurso(cursoID: int, novosDados: Map)
+  + excluirCurso(cursoID: int)
+  + associarProfessorAoCurso(professorID: int, cursoID: int)
+  + registrarNota(alunoID: int, cursoID: int, valorNota: float, data: Date): Nota
+  + atualizarNota(notaID: int, novoValor: float)
+  + consultarHistoricoAluno(alunoID: int): List<HistoricoAcademico>
+  + consultarNotasAluno(alunoID: int): List<Nota>
+  + gerarRelatoriosAcademicos(tipoRelatorio: String): Object
+}
+
+class Administrador extends Funcionario {
+  ' Atributos herdados de Funcionario
+  --
+  + cadastrarNovoFuncionario(dadosFunc: Map): Funcionario
+  + consultarListarFuncionarios(): List<Funcionario>
+  + editarDadosFuncionario(funcionarioID: int, novosDados: Map)
+  + alternarStatusFuncionario(funcionarioID: int, status: boolean)
+}
+
+class Professor extends Funcionario {
+  ' Atributos herdados de Funcionario
+  --
+  + consultarNotasAlunosEmSeusCursos(cursoID: int): List<Nota>
+  + consultarListaAlunosEmSeusCursos(cursoID: int): List<Aluno>
+}
+
+class Curso {
+  - cursoID: int
+  - nome: String
+  - categoria: String
+  - duracao: String
+  - statusCurso: String
+}
+
+class Nota {
+  - notaID: int
+  - valorNota: float
+  - dataLancamento: Date
+}
+
+class HistoricoAcademico {
+  - historicoID: int
+  - dataEvento: Date
+  - statusEvento: String
+}
+
+class DocumentoAluno {
+  - documentoID: int
+  - tipo: String
+  - caminhoArquivo: String
+  - dataUpload: Date
+}
+
+' Relacionamentos de Herança
+Funcionario <|-- Administrador
+Funcionario <|-- Professor
+
+' Relacionamentos de Associação (estilo visual limpo)
+Aluno "1" -- "0..*" Nota
+Nota "0..*" -- "1" Aluno
+
+Curso "1" -- "0..*" Nota
+Nota "0..*" -- "1" Curso
+
+Aluno "1" -- "0..*" HistoricoAcademico
+HistoricoAcademico "0..*" -- "1" Aluno
+
+Curso "1" -- "0..*" HistoricoAcademico
+HistoricoAcademico "0..*" -- "1" Curso
+
+Aluno "1" -- "0..*" DocumentoAluno
+DocumentoAluno "0..*" -- "1" Aluno
+
+Professor "0..*" -- "0..*" Curso
+
+@enduml
