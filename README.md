@@ -1,6 +1,6 @@
 # 📚 Sistema de Cadastro de Alunos
 
-Este projeto tem como objetivo o desenvolvimento de um sistema web para gerenciar alunos, cursos, matrículas, notas e usuários em uma instituição de ensino, com acesso segmentado por perfis (Aluno, Professor, Funcionário e Administrador).
+Este projeto tem como objetivo o desenvolvimento de um sistema para gerenciar alunos, cursos, matrículas, notas e usuários em uma instituição de ensino, com acesso segmentado por perfis (Aluno, Professor, Funcionário e Administrador).
 
 Projeto de A3 da UNP, utilizando modelagem UML (PlantUML), implementação em Java e integração com banco de dados SQL. O design da interface foi desenvolvido com auxílio do Figma.
 
