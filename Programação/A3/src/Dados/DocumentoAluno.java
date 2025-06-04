@@ -1,6 +1,7 @@
 package Dados;
 import java.util.Date;
 
+// Verificar a importância de tal classe
 public class DocumentoAluno {
     private final int documentoID;
     private String tipo;

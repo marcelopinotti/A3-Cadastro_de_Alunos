@@ -25,6 +25,7 @@ public class Nota {
         this.valorNota = valorNota;
     }
 
+    // data do dia que a nota foi lançada
     public Date getDataLancamento() {
         return dataLancamento;
     }

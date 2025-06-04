@@ -4,7 +4,7 @@ public class Curso {
     private final int cursoID;
     private String nome;
     private String categoria;
-    private int duracao;
+    private int duracao; // semestres
     private String status;
 
     public Curso(int cursoID, String nome, String categoria, int duracao, String status) {

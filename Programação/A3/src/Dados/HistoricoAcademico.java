@@ -2,6 +2,9 @@ package Dados;
 
 import java.util.Date;
 
+
+// Falta refatorar para pegar os dados do alun e suas respectivas notas.
+
 public class HistoricoAcademico {
     private final int historicoID;
     private final Date dataEvento;
