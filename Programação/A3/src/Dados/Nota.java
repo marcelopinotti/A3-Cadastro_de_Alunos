@@ -1,16 +1,19 @@
 package Dados;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 public class Nota {
     private final int notaID;
     private double valorNota;
-    private final Date dataLancamento;
+    private final LocalDate dataLancamento;
+    private final int cursoID;
 
-    public Nota(int notaID, double valorNota, Date dataLancamento) {
-     this.notaID = notaID;
-     this.valorNota = valorNota;
-     this.dataLancamento = dataLancamento;
+    public Nota(int notaID, double valorNota, LocalDate dataLancamento, int cursoID) {
+        this.notaID = notaID;
+        this.valorNota = valorNota;
+        this.dataLancamento = dataLancamento;
+        this.cursoID = cursoID;
     }
 
     public int getNotaID() {
@@ -26,8 +29,12 @@ public class Nota {
     }
 
 
-    public Date getDataLancamento() {
+    public LocalDate getDataLancamento() {
         return dataLancamento;
+    }
+
+    public int getCursoID() {
+        return cursoID;
     }
 }
 

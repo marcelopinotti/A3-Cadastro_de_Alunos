@@ -1,5 +1,6 @@
 package Dados;
 
+
 public class Curso {
     private final int cursoID;
     private String nome;
@@ -44,5 +45,7 @@ public class Curso {
     public void setStatusCurso(String status) {
         this.status = status;
     }
+
+
 }
 

@@ -7,8 +7,7 @@ public class Administrador extends Funcionario {
     public Administrador(int funcId, String nome, String cargo, String email, String senha) {
         super(funcId, nome, cargo, email, senha);
     }
-    public Administrador() {
-    }
+
     List<Funcionario> funcionarios;
 
     public List<Funcionario> cadastrarFuncionario(java.util.List<Funcionario> funcionarios, int funcId, String nome, String cargo, String email, String senha) {

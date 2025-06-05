@@ -2,8 +2,8 @@ package Model;
 
 import Dados.*;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Funcionario  extends  Usuario {
 
@@ -14,21 +14,14 @@ public class Funcionario  extends  Usuario {
     private String telefone;
     private String status;
 
-    List<Aluno> alunos;
-    List<Curso> cursos;
-
-
-    public Funcionario() {
-    }
+    List<Aluno> alunos = new ArrayList<>();
+    List<Curso> cursos = new ArrayList<>();
 
     public Funcionario(int funcId, String nome, String cargo, String email, String senha) {
         super(email, senha);
         this.funcId = funcId;
         this.nome = nome;
         this.cargo = cargo;
-    }
-
-    public Funcionario(int funcId, String nome, String cargo) {
     }
 
     public List<Curso> consultarCursos() {
@@ -112,8 +105,7 @@ public class Funcionario  extends  Usuario {
                 }
 
                 System.out.println
-                        (
-                                "Dados atualizados com sucesso!");
+                        ("Dados atualizados com sucesso!");
                 return alunos;
             }
         }
@@ -122,40 +114,40 @@ public class Funcionario  extends  Usuario {
     }
 
 
-    public List<Aluno> ExcluirAluno(int id) {
+    public List<Aluno> excluirAluno(int id) {
         for (Aluno aluno : alunos) {
             if (aluno.getAlunoID() == id) {
                 alunos.remove(aluno);
                 System.out.println("Aluno excluído com sucesso!");
                 return alunos;
             }
-            break;
         }
+
         System.out.println("Aluno não encontrado.");
         return null;
     }
 
     public boolean matricularAlunoEmCurso(Aluno aluno, int cursoId, List<Curso> cursosDisponiveis) {
-        List<Curso> cursos = aluno != null ? aluno.getCursos() : null;
-
         if (aluno == null) {
             System.out.println("Aluno não encontrado.");
             return false;
         }
 
-        for (Curso curso : cursos) {
+        for (Curso curso : cursosDisponiveis) {
             if (curso.getCursoID() == cursoId) {
-                if (cursosDisponiveis.contains(curso)) {
+                if (!aluno.getCursos().contains(curso)) {
+                    aluno.getCursos().add(curso);
+                    System.out.println("Aluno matriculado com sucesso!");
+                    return true;
+                } else {
                     System.out.println("Aluno já está matriculado neste curso.");
                     return false;
                 }
-                System.out.println("Aluno matriculado com sucesso!");
-                return true;
-            } else {
-                System.out.println("Curso não encontrado.");
-                return false;
             }
-        } return true;
+        }
+
+        System.out.println("Curso não encontrado.");
+        return false;
     }
 
 
@@ -211,18 +203,25 @@ public class Funcionario  extends  Usuario {
         System.out.println("Curso não encontrado.");
         return false;
     }
-    String relatorioAcademico;
+
     public String relatorioAcademico() {
+        String relatorio = "Relatório Acadêmico:\n";
+
+        if (alunos == null || alunos.isEmpty()) {
+            relatorio += "Nenhum aluno cadastrado.\n";
+            return relatorio;
+        }
+
         for (Aluno aluno : alunos) {
-            relatorioAcademico = ("Relatório Acadêmico:\n"
-                    +"ID: " + aluno.getAlunoID()
+            relatorio += "ID: " + aluno.getAlunoID()
                     + ", Nome: " + aluno.getNome()
                     + ", Email: " + aluno.getEmail()
                     + ", Telefone: " + aluno.getTelefone()
                     + ", Endereço: " + aluno.getEndereco()
-                    + "\n");
+                    + "\n";
         }
-        return relatorioAcademico;
+
+        return relatorio;
     }
 
 }
