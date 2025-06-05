@@ -1,10 +1,12 @@
-package Agentes;
+package Model;
 
 import java.util.ArrayList;
 import java.util.List;
 import Dados.*;
 
 public class Aluno extends Usuario {
+
+
     private final int alunoID;
     private String nome;
     private final String cpf;
@@ -12,8 +14,9 @@ public class Aluno extends Usuario {
     private String endereco;
 
     private List<Nota> notas = new ArrayList<>();
-    private List<HistoricoAcademico> historico = new ArrayList<>();
-    private List<DocumentoAluno> documentos = new ArrayList<>();
+    private List<Curso> cursos = new ArrayList<>();
+
+
 
     public Aluno(int alunoID, String nome, String cpf, String email, String telefone, String endereco, String senha) {
         super(email, senha);
@@ -34,17 +37,9 @@ public class Aluno extends Usuario {
         return notas;
     }
 
-    public List<HistoricoAcademico> consultarHistorico() {
-        return historico;
-    }
 
-    public void anexarDocumento(DocumentoAluno documento) {
-        documentos.add(documento);
-    }
 
-    public void adicionarNota(Nota nota) {
-        notas.add(nota);
-    }
+
 
     public int getAlunoID() {
         return alunoID;
@@ -86,19 +81,25 @@ public class Aluno extends Usuario {
         this.notas = notas;
     }
 
-    public List<HistoricoAcademico> getHistorico() {
-        return historico;
+    public List<Curso> getCursos() {
+        return cursos;
     }
 
-    public void setHistorico(List<HistoricoAcademico> historico) {
-        this.historico = historico;
+    public List<Curso> setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
+        return this.cursos;
     }
 
-    public List<DocumentoAluno> getDocumentos() {
-        return documentos;
+    public String consultarNota(List<Nota> notas) {
+        if (notas.isEmpty()) {
+            System.out.println("Nenhuma nota cadastrada.");
+        } else {
+            for (Nota nota : notas) {
+                System.out.println("Nota ID: " + nota.getNotaID() + ", Valor: "
+                        + nota.getValorNota() + "," +
+                        " Data de Lançamento: " + nota.getDataLancamento());
+            }
+        } return notas.toString();
     }
 
-    public void setDocumentos(List<DocumentoAluno> documentos) {
-        this.documentos = documentos;
-    }
 }

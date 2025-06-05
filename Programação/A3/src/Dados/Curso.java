@@ -7,6 +7,7 @@ public class Curso {
     private int duracao;
     private String status;
 
+
     public Curso(int cursoID, String nome, String categoria, int duracao, String status) {
         this.cursoID = cursoID;
         this.nome = nome;
@@ -15,9 +16,9 @@ public class Curso {
         this.status = status;
     }
 
-    public int getCursoID() {
-        return cursoID;
-    }
+
+
+    public int getCursoID() {return cursoID;}
     public String getNome() {
         return nome;
     }
