@@ -38,19 +38,15 @@ class Funcionario {
   --
   + autenticarSe(login: String, senha: String): boolean
   + cadastrarAluno(dadosAluno: AlunoData): Aluno
-  + consultarListarAlunos(): List<Aluno>
+  + ListarAlunos(): List<Aluno>
   + atualizarDadosAluno(alunoID: int, novosDados: AlunoData)
   + excluirAluno(alunoID: int)
   + matricularAlunoEmCurso(alunoID: int, cursoID: int): HistoricoAcademico
-  + atualizarStatusMatricula(historicoID: int, novoStatus: String)
   + cadastrarNovoCurso(dadosCurso: CursoData): Curso
-  + consultarListarCursos(): List<Curso>
+  + consultarCursos(): List<Curso>
   + atualizarDadosCurso(cursoID: int, novosDados: CursoData)
   + excluirCurso(cursoID: int)
-  + associarProfessorAoCurso(professorID: int, cursoID: int)
-  + consultarHistoricoAluno(alunoID: int): List<HistoricoAcademico>
-  + consultarNotasAluno(alunoID: int): List<Nota>
-  + gerarRelatoriosAcademicos(tipoRelatorio: String): Object
+  + gerarRelatoriosAcademicos(tipoRelatorio: String): Object 
 }
 
 class Administrador extends Funcionario {
@@ -58,6 +54,7 @@ class Administrador extends Funcionario {
   + consultarListarFuncionarios(): List<Funcionario>
   + editarDadosFuncionario(funcionarioID: int, novosDados: FuncionarioData)
   + alternarStatusFuncionario(funcionarioID: int, status: boolean)
+  + associarProfessorAoCurso(professorID: int, cursoID: int)
 }
 
 class Professor {
@@ -77,7 +74,7 @@ class Curso {
   - cursoID: int
   - nome: String
   - categoria: String
-  - duracao: double
+  - duracao: int
   - statusCurso: String
 }
 
@@ -87,11 +84,6 @@ class Nota {
   - dataLancamento: Date
 }
 
-class HistoricoAcademico {
-  - historicoID: int
-  - dataEvento: Date
-  - statusEvento: String
-}
 
 
 Funcionario <|-- Administrador
@@ -100,15 +92,13 @@ Funcionario <|-- Administrador
 Aluno "1" -- "0..*" Nota
 Curso "1" -- "0..*" Nota
 
-Aluno "1" -- "0..*" HistoricoAcademico
-Curso "1" -- "0..*" HistoricoAcademico
 
 Professor "0..*" -- "0..*" Curso
 
 Funcionario ..> Aluno
 Funcionario ..> Curso
 Funcionario ..> Nota
-Funcionario ..> HistoricoAcademico
+
 
 
 Professor ..> Nota

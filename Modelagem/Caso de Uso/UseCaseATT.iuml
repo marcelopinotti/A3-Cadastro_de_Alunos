@@ -51,7 +51,6 @@ package "Gestão de Alunos" {
   usecase "Excluir Aluno" as UC_ExcluirAluno
   usecase "Matricular Aluno em Curso" as UC_MatricularAlunoEmCurso
   usecase "Atualizar Status de Matrícula" as UC_AtualizarStatusMatricula
-  usecase "Aluno Atualiza Próprios Dados" as UC_AlunoAtualizaPropriosDados
 }
 
 package "Gestão de Cursos" {
@@ -68,9 +67,7 @@ package "Registro de Notas" {
 }
 
 package "Consultas e Histórico Acadêmico" {
-  usecase "Consultar Histórico Acadêmico de Aluno" as UC_FuncConsultarHistoricoAluno
   usecase "Consultar Notas de Aluno" as UC_FuncConsultarNotasAluno
-  usecase "Consultar Próprio Histórico Acadêmico" as UC_AlunoConsultarProprioHistorico
   usecase "Consultar Próprias Notas" as UC_AlunoConsultarPropriasNotas
   usecase "Consultar Notas de Alunos em Seus Cursos" as UC_ProfConsultarNotasAlunosCursos
   usecase "Consultar Lista de Alunos em Seus Cursos" as UC_ProfConsultarListaAlunosCursos
@@ -103,7 +100,7 @@ Funcionario -- UC_AssociarProfessorAoCurso
 Professor -- UC_RegistrarNota
 Professor -- UC_AtualizarNota
 
-Funcionario -- UC_FuncConsultarHistoricoAluno
+
 Funcionario -- UC_FuncConsultarNotasAluno
 Professor -- UC_ProfConsultarNotasAlunosCursos
 Professor -- UC_ProfConsultarListaAlunosCursos
@@ -114,8 +111,6 @@ actor Aluno
 
 UC_AutenticarNoSistema -- Aluno
 UC_RealizarLogout -- Aluno
-UC_AlunoAtualizaPropriosDados -- Aluno
-UC_AlunoConsultarProprioHistorico -- Aluno
 UC_AlunoConsultarPropriasNotas -- Aluno
 
 @enduml
