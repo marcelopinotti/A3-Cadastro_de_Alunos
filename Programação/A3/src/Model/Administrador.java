@@ -3,6 +3,8 @@ package Model;
 import java.util.List;
 
 
+// Fiz mais um metodo, listando o menu da classe, lembrar de adicionar isso.
+
 public class Administrador extends Funcionario {
     public Administrador(int funcId, String nome, String cargo, String email, String senha) {
         super(funcId, nome, cargo, email, senha);
@@ -55,5 +57,12 @@ public class Administrador extends Funcionario {
         return false;
     }
 
+
+    public void menu(){
+        System.out.println("1 - Cadastrar novo funcionário: ");
+        System.out.println("2 - Consultar funcionários: ");
+        System.out.println("3 - Atualizar dados de funcionários: ");
+        System.out.println("4 - Excluir funcionário: ");
+    }
 }
 

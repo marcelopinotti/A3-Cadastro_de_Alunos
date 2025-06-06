@@ -75,6 +75,6 @@ Projeto de A3 da UNP, utilizando modelagem UML (PlantUML), implementação em Ja
 
 ### 🧹 Manutenibilidade
 - **RNF014**: Código-fonte documentado e seguindo boas práticas.
-- **RNF015**: Arquitetura modular baseada em camadas (Tela, Controller, Serviço, etc.).
+- **RNF015**: Arquitetura modular baseada em camadas (Tela, Controlador, Serviço, etc.).
 
 ---
