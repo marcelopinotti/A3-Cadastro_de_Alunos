@@ -1,0 +1,107 @@
+@startuml
+title Diagrama de Classes - Cadastro de Alunos
+
+left to right direction
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0 
+
+skinparam classBorderColor #191139
+skinparam ClassFontSize 15
+skinparam arrowThickness 1.5
+skinparam arrowFontColor #607D8B
+skinparam arrowFontSize 22
+skinparam shadowing true
+skinparam classFontStyle bold
+skinparam classBackgroundColor #E0D8C2
+
+
+class Aluno {
+  - alunoID: int
+  - nome: String
+  - cpf: String
+  - email: String
+  - telefone: String
+  - endereco: String
+  --
+  + autenticarSe(login: String, senha: String): boolean
+  + atualizarPropriosDados(novosDados: AlunoData)
+  + consultarProprioHistorico(): List<HistoricoAcademico>
+  + consultarPropriasNotas(): List<Nota>
+}
+
+class Funcionario {
+  - funcionarioID: int
+  - nome: String
+  - cargo: String
+  - login: String
+  - senha: String
+  --
+  + autenticarSe(login: String, senha: String): boolean
+  + cadastrarAluno(dadosAluno: AlunoData): Aluno
+  + ListarAlunos(): List<Aluno>
+  + atualizarDadosAluno(alunoID: int, novosDados: AlunoData)
+  + excluirAluno(alunoID: int)
+  + matricularAlunoEmCurso(alunoID: int, cursoID: int): HistoricoAcademico
+  + cadastrarNovoCurso(dadosCurso: CursoData): Curso
+  + consultarCursos(): List<Curso>
+  + atualizarDadosCurso(cursoID: int, novosDados: CursoData)
+  + excluirCurso(cursoID: int)
+  + gerarRelatoriosAcademicos(tipoRelatorio: String): Object 
+}
+
+class Administrador extends Funcionario {
+  + cadastrarNovoFuncionario(dadosFunc: FuncionarioData): Funcionario
+  + consultarListarFuncionarios(): List<Funcionario>
+  + editarDadosFuncionario(funcionarioID: int, novosDados: FuncionarioData)
+  + alternarStatusFuncionario(funcionarioID: int, status: boolean)
+  + associarProfessorAoCurso(professorID: int, cursoID: int)
+}
+
+class Professor {
+  - professorID: int
+  - nome: String
+  - login: String
+  - senha: String
+  --
+  + autenticarSe(login: String, senha: String): boolean
+  + registrarNota(alunoID: int, cursoID: int, valorNota: double, data: Date): Nota
+  + atualizarNota(notaID: int, novoValor: double): Nota
+  + consultarNotasAlunosEmSeusCursos(cursoID: int): List<Nota>
+  + consultarListaAlunosEmSeusCursos(cursoID: int): List<Aluno>
+}
+
+class Curso {
+  - cursoID: int
+  - nome: String
+  - categoria: String
+  - duracao: int
+  - statusCurso: String
+}
+
+class Nota {
+  - notaID: int
+  - valorNota: double
+  - dataLancamento: Date
+}
+
+
+
+Funcionario <|-- Administrador
+
+
+Aluno "1" -- "0..*" Nota
+Curso "1" -- "0..*" Nota
+
+
+Professor "0..*" -- "0..*" Curso
+
+Funcionario ..> Aluno
+Funcionario ..> Curso
+Funcionario ..> Nota
+
+
+
+Professor ..> Nota
+Professor ..> Aluno
+
+@enduml
