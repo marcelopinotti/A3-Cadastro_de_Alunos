@@ -1,0 +1,114 @@
+Requisitos Funcionais (RF)
+
+Os requisitos funcionais descrevem o que o sistema deve fazer, ou seja, suas funcionalidades e comportamentos específicos. Eles são derivados principalmente do diagrama de casos de uso e detalhados pelos diagramas de sequência e BPMN.
+
+RF - Gestão de Alunos (Primariamente pelo Funcionário)
+
+    RF001: O sistema deve permitir que um Funcionário cadastre um novo aluno, inserindo informações como nome, CPF, e-mail, telefone e endereço.
+
+    RF002: O sistema deve permitir que um Funcionário consulte e liste todos os alunos cadastrados.
+
+    RF003: O sistema deve permitir que um Funcionário atualize os dados cadastrais de um aluno existente.
+
+    RF004: O sistema deve permitir que um Funcionário exclua o registo de um aluno.
+
+    RF005: O sistema deve permitir que um Funcionário matricule um aluno em um curso.
+
+    RF006: O sistema deve permitir que um Funcionário atualize o status da matrícula de um aluno em um curso (ex: ativo, trancado, concluído).
+
+    RF007: O sistema deve validar os dados inseridos durante o cadastro e atualização de alunos (ex: formato de CPF, e-mail, campos obrigatórios).
+
+    RF008: O sistema deve notificar o Funcionário sobre o sucesso ou falha no cadastro/atualização de um aluno.
+
+    RF009: O sistema deve permitir que um Aluno atualize seus próprios dados cadastrais (exceto informações críticas como CPF, que podem requerer aprovação).
+
+RF - Gestão de Cursos (Primariamente pelo Funcionário)
+
+    RF010: O sistema deve permitir que um Funcionário cadastre um novo curso, informando nome, categoria, duração, etc.
+
+    RF011: O sistema deve permitir que um Funcionário consulte e liste todos os cursos cadastrados.
+    As dados de um curso existente.
+
+    RF012: O sistema deve permitir que um Funcionário exclua um curso.
+
+    RF013: O sistema deve permitir que um Funcionário associe um Professor a um curso.
+
+RF - Gestão de Notas (Primariamente pelo Professor)
+
+    RF014: O sistema deve permitir que um Professor registe notas para os alunos em seus cursos.
+
+    RF015: O sistema deve permitir que um Professor atualize notas previamente registadas.
+
+RF - Consultas e Histórico Académico
+
+    RF016: O sistema deve permitir que um Aluno consulte suas próprias notas.
+
+    RF017: O sistema deve permitir que um Aluno consulte seu próprio histórico académico (cursos matriculados, status, etc.).
+
+    RF018: O sistema deve permitir que um Professor consulte a lista de alunos matriculados em seus cursos.
+
+    RF019: O sistema deve permitir que um Professor consulte as notas dos alunos em seus cursos.
+
+    RF020: O sistema deve permitir que um Funcionário consulte as notas de um aluno específico.
+
+    RF021: O sistema deve permitir que um Funcionário consulte o histórico académico de um aluno específico.
+
+RF - Administração do Sistema (Primariamente pelo Administrador)
+
+    RF022: O sistema deve permitir que um Administrador cadastre um novo funcionário.
+
+    RF023: O sistema deve permitir que um Administrador consulte e liste todos os funcionários.
+
+    RF024: O sistema deve permitir que um Administrador atualize os dados de um funcionário.
+
+    RF025: O sistema deve permitir que um Administrador exclua o registo de um funcionário (ou altere seu status para inativo).
+
+RF - Autenticação e Acesso
+
+    RF026: O sistema deve permitir que Alunos, Professores, Funcionários e Administradores se autentiquem para aceder às suas respectivas funcionalidades.
+
+    RF027: O sistema deve possuir diferentes níveis de acesso baseados no perfil do usuário (Aluno, Professor, Funcionário, Administrador).
+
+    RF028: O sistema deve permitir que os usuários realizem logout.
+
+Requisitos Não Funcionais (RNF)
+
+RNF - Usabilidade
+
+    RNF001: A interface do sistema deve ser intuitiva e de fácil aprendizado para os diferentes perfis de usuários.
+
+    RNF002: O sistema deve fornecer feedback claro ao usuário após a realização de ações (ex: mensagens de sucesso, erro, confirmação).
+
+    RNF003: O tempo de resposta para operações comuns (consultas, submissão de formulários) não deve exceder 3 segundos em condições normais de uso.
+
+    RNF004: O sistema deve ser acessível em navegadores web modernos (Chrome, Firefox, Edge, Safari nas últimas duas versões).
+
+RNF - Desempenho
+
+    RNF005: O sistema deve ser capaz de permitir usuários simultâneos realizando operações de cadastro e consulta sem degradação significativa de performance.
+
+    RNF006: Consultas a listas de alunos ou cursos com registros devem ser retornadas em menos de 5 segundos.
+
+RNF - Segurança
+
+    RNF007: Os dados sensíveis dos alunos e funcionários (ex: CPF, senhas) devem ser armazenados de forma segura (ex: senhas com hash criptográfico).
+
+    RNF008: O sistema deve implementar mecanismos de proteção contra ataques comuns (ex: SQL Injection, XSS).
+
+    RNF009: O acesso às funcionalidades do sistema deve ser estritamente controlado por meio de autenticação e autorização baseada em perfis.
+
+    RNF010: O sistema deve registar logs de acesso e alterações importantes para fins de auditoria.
+
+RNF - Confiabilidade
+
+    RNF011: O sistema deve ter uma disponibilidade de 24h/dia
+
+    RNF012: O sistema deve possuir mecanismos de backup regular dos dados para prevenir perdas.
+
+    RNF013: Em caso de falha na validação de dados, o sistema deve informar claramente os campos incorretos e o motivo da falha, permitindo a correção pelo usuário.
+
+RNF - Manutenibilidade
+
+    RNF014: O código-fonte do sistema deve ser bem documentado e seguir padrões de codificação definidos para facilitar a manutenção e evolução.
+
+    RNF015: A arquitetura do sistema deve ser modular, permitindo que componentes sejam atualizados ou substituídos com mínimo impacto em outras partes do sistema (como sugerido pelo diagrama de sequência com camadas de Tela, Controlador, Serviço, etc.).
